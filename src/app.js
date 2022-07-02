@@ -28,15 +28,25 @@ let dateElement = document.querySelector("#current-time");
 let currentTime = new Date();
 dateElement.innerHTML = updateDay(currentTime);
 
-function celsiusTemp(event) {
+function updateCelsius(event) {
   event.preventDefault();
-  let highTemp = document.querySelector("#high-temp-day1");
-  highTemp.innerHTML = 20;
+
   let units = document.querySelectorAll("span.units");
   units.forEach((unitsElement) => {
     unitsElement.innerHTML = "°C";
   });
 }
+
+function celsiusTemp(response) {
+  response.preventDefault();
+  let unit = "metric";
+  let city = document.querySelector("#input-city");
+  let apiKey = "8a104eff40d67002b71f619e6f4833ec";
+  let apiUrl = `https://api.openweathermap.org/data/2.5/weather?q=${city.value}&units=${unit}&appid=${apiKey}`;
+  axios.get(apiUrl).then(updateCelsius);
+  console.log(apiUrl);
+}
+
 function farenheitTemp(event) {
   event.preventDefault();
   let highTemp = document.querySelector("#high-temp-day1");
