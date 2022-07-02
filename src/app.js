@@ -32,11 +32,15 @@ function celsiusTemp(event) {
   event.preventDefault();
   let highTemp = document.querySelector("#high-temp-day1");
   highTemp.innerHTML = 20;
+  let units = document.querySelectorAll("span.units");
+  units.forEach((unitsElement) => {
+    unitsElement.innerHTML = "°C";
+  });
 }
 function farenheitTemp(event) {
   event.preventDefault();
   let highTemp = document.querySelector("#high-temp-day1");
-  highTemp.innerHTML = (highTemp * 9) / 5 + 32;
+  highTemp.innerHTML = 68;
   let units = document.querySelectorAll("span.units");
   units.forEach((unitsElement) => {
     unitsElement.innerHTML = "°F";
@@ -77,9 +81,9 @@ search.addEventListener("submit", updateCity);
 function showMyLocation(response) {
   let cityElement = document.querySelector("#h1-city");
   let tempElement = document.querySelector("#high-temp-day1");
-  let temperature = Math.round(response.data.main.temp);
+  let temperatureC = Math.round(response.data.main.temp_max);
   cityElement.innerHTML = response.data.name;
-  tempElement.innerHTML = temperature;
+  tempElement.innerHTML = temperatureC;
 }
 
 function findMe(position) {
