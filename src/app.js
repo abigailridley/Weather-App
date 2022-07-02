@@ -36,7 +36,11 @@ function celsiusTemp(event) {
 function farenheitTemp(event) {
   event.preventDefault();
   let highTemp = document.querySelector("#high-temp-day1");
-  highTemp.innerHTML = 68;
+  highTemp.innerHTML = (highTemp * 9) / 5 + 32;
+  let units = document.querySelectorAll("span.units");
+  units.forEach((unitsElement) => {
+    unitsElement.innerHTML = "°F";
+  });
 }
 
 function updateCity(event) {
@@ -47,8 +51,8 @@ function updateCity(event) {
 }
 function updateCityTemp(response) {
   let temperatureElement = document.querySelector("#high-temp-day1");
-  temperature = Math.round(response.data.main.temp_max);
-  temperatureElement.innerHTML = temperature;
+  temperatureC = Math.round(response.data.main.temp_max);
+  temperatureElement.innerHTML = temperatureC;
 }
 
 function getCity(response) {
