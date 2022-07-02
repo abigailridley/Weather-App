@@ -32,24 +32,37 @@
 </form>
  <button class="locate-me-btn" id="locate-me-btn">Locate Me</button></span>
           <h1 class="title-city"id="h1-city"></h1>
-          <h2>Today</h2> <div id="current-time"></div>
 
-          <div class="row weather-day1">
-            <div class="col-2"><i class="fa-solid fa-sun weather-icon-day1"></i></div>
-            <div class="col-3 temp-day1"> <div class="high-temp high-temp-day1"><span id="high-temp-day1">20</span><span class="units units-high"> <a href="#" class="celsius" id="day1-celsius">°C</a> | <a href="#" class="farenheit" id="day1-farenheit">F</a></span></div>
-              <div class="low-temp low-temp-day1">
-              8<span class="units units-low"> °C | F</span></div>
-              
-            </div>
-            <div class="col-4 precip-col">Precipitation: 1%
-           <div class="wind">Wind: 8mph</div></div>
-           <div class="col-3 sunrise-sunset">
-             <div class="sunrise"><i class="fa-regular fa-sun sunrise-icon"></i> 04:56</div>
-             <div class="sunset"> <i class="fa-regular fa-moon sunset-icon"></i> 20:52</div>
-           </div>
-          </div>
-          
-          
+  <div class="row">
+  <div class="col-6">
+    <ul class="day1-list">
+      <li>
+<h2>Today</h2>
+      </li>
+      <li>
+       <div class="row">
+<div class="col-4">
+ <i class="fa-solid fa-sun weather-icon-day1"></i>
+</div>          
+ <div class="col-8 day1-temp">
+    <span class="high-temp high-temp-day1"><span id="high-temp-day1">20</span>
+    <span class="units units-high"> <a href="#" class="celsius" id="day1-celsius">°C</a> | <a href="#" class="farenheit" id="day1-farenheit">F</a></span></span>
+    <div class="low-temp low-temp-day1">
+        8<span class="units units-low"> °C | F</span></div>
+</div>
+ <li>
+ Last updated: <span id="current-time"></span>
+  </li>
+</ul>
+    
+
+  </div>
+  <div class="col-6 day1-details">
+    Precipitation: 1%
+   <div class="wind">Wind: 8mph</div>
+  <span class="sunrise"><i class="fa-regular fa-sun sunrise-icon"></i> 04:56</span>
+  <span class="sunset"> <i class="fa-regular fa-moon sunset-icon"></i> 20:52</span>
+  </div>
           
           
           <div class="card-group week-display">
@@ -111,6 +124,7 @@
                   </div>
                 </div>
               </div>
+              </div>
               <Small class="source-link" ><a href="https://github.com/george-ridley/Weather-App" target="_blank">Open source</a> by Abigail Ridley </Small>
               </div>
             </div>
@@ -118,6 +132,7 @@
         </div>
       </div>
     </div>
+    
     <script src="src/app.js"></script>
   </body>
 </html>

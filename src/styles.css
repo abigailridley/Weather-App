@@ -11,12 +11,27 @@
 .card-title {
   margin-top: 0;
 }
+
+.day1-list {
+  list-style: none;
+  padding-left: 0px;
+  margin: 0 auto;
+}
+
+.day1-details {
+  padding-top: 50px;
+}
+.day1-temp {
+  text-align: center;
+}
+
 .units {
-  font-size: 15px;
+  font-size: 12px;
 }
 .units-high {
   position: relative;
-  top: -18px;
+  top: -25px;
+  left: -8px;
 }
 .units-low {
   position: relative;
@@ -41,10 +56,7 @@
   margin-top: 10px;
   margin-bottom: 20px;
 }
-.precip-col {
-  margin-left: 0px;
-  text-align: left;
-}
+
 .search-bar {
   margin: 10px 0 20px 20px;
 }
@@ -63,17 +75,12 @@
 .title-city {
   text-transform: capitalize;
 }
-.weather-day1 {
-  text-align: center;
-}
+
 .weather-icon-day1 {
   font-size: 60px;
-  position: relative;
-  top: 20px;
 }
 .weather-icon {
   font-size: 30px;
-  margin-bottom: 5px;
 }
 
 .week-display {
