@@ -35,10 +35,12 @@
 .last-updated {
   padding-top: 30px;
   list-style: none;
+  color: #70757a;
 }
 
 .last-updated .current-time {
   font-weight: bold;
+  color: #444649;
 }
 
 .low-temp {
@@ -48,6 +50,8 @@
   font-size: 40px;
   font-weight: lighter;
   display: block;
+  margin-left: 80px;
+  color: #70757a;
 }
 .main-app {
   border: solid 1px;
@@ -76,22 +80,30 @@
 
 .title-city {
   text-transform: capitalize;
+  font-weight: bold;
+  font-size: 40px;
 }
 .temperature-list {
   display: inline;
   margin: 0;
   padding: 0;
-  text-align: center;
 }
 .today {
   font-size: 30px;
-  font-weight: bold;
 }
 
 .weather-icon-day1 {
-  font-size: 80px;
-  margin-top: 20px;
+  font-size: 60px;
 }
-.weather-icon {
-  font-size: 30px;
+
+.weather-description {
+  font-size: 20px;
+  color: #70757a;
+}
+
+.wind {
+  color: #444649;
+}
+.precipitation {
+  color: #444649;
 }

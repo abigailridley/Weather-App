@@ -24,10 +24,6 @@ function updateDay(date) {
   return `${currentDay} ${currentHour}:${currentMinute}`;
 }
 
-let dateElement = document.querySelector("#current-time");
-let currentTime = new Date();
-dateElement.innerHTML = updateDay(currentTime);
-
 function celsiusTemp() {
   let units = document.querySelectorAll("span.units");
   units.forEach((unitsElement) => {
@@ -68,16 +64,6 @@ function getCity(response) {
   axios.get(apiUrl).then(updateCityTemp);
 }
 
-let celsiusClick = document.querySelector("#day1-celsius");
-let farenheitClick = document.querySelector("#day1-farenheit");
-
-celsiusClick.addEventListener("click", celsiusTemp);
-farenheitClick.addEventListener("click", farenheitTemp);
-
-let search = document.querySelector("#search-bar");
-search.addEventListener("submit", getCity);
-search.addEventListener("submit", updateCity);
-
 function showMyLocation(response) {
   let cityElement = document.querySelector("#h1-city");
   let tempElement = document.querySelector("#high-temp-day1");
@@ -98,5 +84,20 @@ function getCurrentLocation(event) {
   event.preventDefault();
   navigator.geolocation.getCurrentPosition(findMe);
 }
+
 let locateMeBtn = document.querySelector("#locate-me-btn");
 locateMeBtn.addEventListener("click", getCurrentLocation);
+
+let celsiusClick = document.querySelector("#day1-celsius");
+let farenheitClick = document.querySelector("#day1-farenheit");
+
+celsiusClick.addEventListener("click", celsiusTemp);
+farenheitClick.addEventListener("click", farenheitTemp);
+
+let search = document.querySelector("#search-bar");
+search.addEventListener("submit", getCity);
+search.addEventListener("submit", updateCity);
+
+let dateElement = document.querySelector("#current-time");
+let currentTime = new Date();
+dateElement.innerHTML = updateDay(currentTime);

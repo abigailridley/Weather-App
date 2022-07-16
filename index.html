@@ -36,15 +36,9 @@
       </span>
 
      
-  <h1 class="title-city" id="h1-city">Glasgow</h1>
-<ul class="col1-list">
-<li class="today">
-  Today
-</li>
-<li class="weather-description">
-  Clear
-</li>
-</ul>
+  <h1 class="today">Today</h1>
+  <h2 class="title-city" id="h1-city">Glasgow</h2>
+
 
 <div class="row">
 <div class="col-7">
@@ -56,12 +50,12 @@
   | 
   <a href="#" class="farenheit" id="day1-farenheit">°F</a></span></span>
 </li>
-<li class="temperature-list">
-<span class="low-temp low-temp-day1">
-        8<span class="units units-low"> °C</span>
-</span>
+    <li class="col1-list weather-description">
+  Clear
 </li>
- <li class="last-updated">
+  
+
+ <li class="last-updated col1-list">
  Last updated: <span class="current-time" id="current-time"></span>
   </li>
 </ul>
@@ -69,10 +63,10 @@
  <div class="col-5">
 <ul class="col2-list">
 <li class="col2-list">
-Precipitation: 1%
+Precipitation: <span class="precipitation" id="precipitation"> 1%</span>
 </li>
-<li class="wind col2-list">
-Wind: 8mph
+<li class="col2-list">
+Wind: <span id="wind" class="wind">8mph</span>
 </li>
 <li class="col2-list"> 
 <div class="sunrise-sunset">
