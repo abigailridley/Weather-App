@@ -1,25 +1,17 @@
-.card-group {
-  text-align: center;
+.main-body {
+  color: #444649;
 }
 
-.week-display.card {
-  transition: all 0.3s ease-in-out;
-}
-.card-title {
-  margin-top: 0;
-}
-
-.day1-list {
+.col2-list {
   list-style: none;
-  padding-left: 0px;
-  margin: 0 auto;
+  color: #70757a;
+  padding: 0;
+  margin: 0;
 }
-
-.day1-details {
-  padding-top: 50px;
-}
-.day1-temp {
-  text-align: center;
+.col1-list {
+  list-style: none;
+  padding: 0;
+  margin: 0;
 }
 
 .units {
@@ -27,8 +19,8 @@
 }
 .units-high {
   position: relative;
-  top: -30px;
-  left: -10px;
+  top: -38px;
+
   font-size: 15px;
 }
 .units-low {
@@ -36,18 +28,16 @@
   top: -15px;
 }
 
-.units-week {
-  position: relative;
-  top: -5px;
-}
-.high-temp {
-  font-size: larger;
-}
 .high-temp-day1 {
-  font-size: 70px;
+  font-size: 65px;
 }
+
 .last-updated {
-  padding-top: 20px;
+  padding-top: 30px;
+  list-style: none;
+}
+
+.last-updated .current-time {
   font-weight: bold;
 }
 
@@ -57,6 +47,7 @@
 .low-temp-day1 {
   font-size: 40px;
   font-weight: lighter;
+  display: block;
 }
 .main-app {
   border: solid 1px;
@@ -80,12 +71,21 @@
   color: #4f81c7;
 }
 .temp-day1 {
-  text-align: center;
   font-size: larger;
 }
 
 .title-city {
   text-transform: capitalize;
+}
+.temperature-list {
+  display: inline;
+  margin: 0;
+  padding: 0;
+  text-align: center;
+}
+.today {
+  font-size: 30px;
+  font-weight: bold;
 }
 
 .weather-icon-day1 {
@@ -94,17 +94,4 @@
 }
 .weather-icon {
   font-size: 30px;
-}
-
-.week-display {
-  display: flex;
-  padding-top: 10px;
-}
-
-.zoom {
-  transition: transform 0.2s;
-}
-.zoom:hover {
-  transform: scale(1.05);
-  cursor: pointer;
 }
