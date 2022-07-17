@@ -98,6 +98,21 @@ function getCurrentLocation(event) {
   navigator.geolocation.getCurrentPosition(findMe);
 }
 
+function search(city) {
+  let apiKey = "5f472b7acba333cd8a035ea85a0d4d4c";
+  let apiUrl = `https://api.openweathermap.org/data/2.5/weather?q=${city}&appid=${apiKey}&units=metric`;
+  axios.get(apiUrl).then(updateCityTemp);
+}
+
+function handleSubmit(event) {
+  event.preventDefault();
+  let cityInputElement = document.querySelector("#input-city");
+  search(cityInputElement.value);
+}
+
+let form = document.querySelector("#search-bar");
+form.addEventListener("submit", handleSubmit);
+
 let locateMeBtn = document.querySelector("#locate-me-btn");
 locateMeBtn.addEventListener("click", getCurrentLocation);
 
@@ -106,24 +121,7 @@ let farenheitClick = document.querySelector("#day1-farenheit");
 
 farenheitClick.addEventListener("click", farenheitTemp);
 
-let search = document.querySelector("#search-bar");
-search.addEventListener("submit", getCity);
-
 let dateElement = document.querySelector("#current-time");
 let currentTime = new Date();
 dateElement.innerHTML = updateDay(currentTime);
-
-// function celsiusTemp(event) {
-//   event.preventDefault();
-//   let units = document.querySelectorAll("span.units");
-//   units.forEach((unitsElement) => {
-//     unitsElement.innerHTML = "°C";
-//   });
-// }
-// celsiusClick.addEventListener("click", celsiusTemp);
-
-//   let units = document.querySelectorAll("span.units");
-//   units.forEach((unitsElement) => {
-//     unitsElement.innerHTML = "°F";
-//   });
-// }
+search("Brighton");
