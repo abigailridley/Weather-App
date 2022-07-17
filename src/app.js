@@ -37,6 +37,8 @@ function updateCityTemp(response) {
   let descriptionElement = document.querySelector("#description");
   let humidityElement = document.querySelector("#humidity");
   let windElement = document.querySelector("#wind");
+  let iconElement = document.querySelector("#weather-icon");
+
   let sunriseElement = document.querySelector("#sunrise");
   let sunsetElement = document.querySelector("#sunset");
   let sunriseTimestamp = response.data.sys.sunrise;
@@ -50,8 +52,12 @@ function updateCityTemp(response) {
   let sunsetTimestamp = response.data.sys.sunset;
   let sunset = new Date(sunsetTimestamp * 1000);
   let sunsetHours = sunset.getHours();
+  if (sunsetHours < 10) {
+    sunsetHours = `0${sunsetHours}`;
+  }
   let sunsetMinutes = "0" + sunset.getMinutes();
   let formattedSunset = `${sunsetHours}:${sunsetMinutes.substr(-2)}`;
+
   temperatureC = Math.round(response.data.main.temp);
   temperatureElement.innerHTML = temperatureC;
   cityElement.innerHTML = response.data.name;
@@ -60,6 +66,7 @@ function updateCityTemp(response) {
   windElement.innerHTML = Math.round(response.data.wind.speed);
   sunriseElement.innerHTML = formattedSunrise;
   sunsetElement.innerHTML = formattedSunset;
+  console.log(response.data);
 }
 
 function getCity(response) {
