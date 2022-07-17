@@ -45,12 +45,6 @@ function farenheitTemp(event) {
 //   });
 // }
 
-// function updateCity(event) {
-//   event.preventDefault();
-//   let input = document.querySelector("#h1-city");
-//   let city = document.querySelector("#input-city");
-//   input.innerHTML = `${city.value}`;
-// }
 function updateCityTemp(response) {
   let temperatureElement = document.querySelector("#high-temp-day1");
   let cityElement = document.querySelector("#h1-city");
@@ -99,7 +93,6 @@ farenheitClick.addEventListener("click", farenheitTemp);
 
 let search = document.querySelector("#search-bar");
 search.addEventListener("submit", getCity);
-// search.addEventListener("submit", updateCity);
 
 let dateElement = document.querySelector("#current-time");
 let currentTime = new Date();
