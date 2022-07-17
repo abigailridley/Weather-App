@@ -93,12 +93,13 @@
 }
 
 .weather-icon-day1 {
-  font-size: 60px;
+  font-size: 10px;
 }
 
 .weather-description {
   font-size: 20px;
   color: #70757a;
+  max-width: 10em;
 }
 .weather-description:first-letter {
   text-transform: capitalize;

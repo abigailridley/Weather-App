@@ -1,4 +1,4 @@
-function updateDay(date) {
+function updateDay() {
   let now = new Date();
   let dayIndex = [
     "Sunday",
@@ -37,7 +37,6 @@ function updateCityTemp(response) {
   let descriptionElement = document.querySelector("#description");
   let humidityElement = document.querySelector("#humidity");
   let windElement = document.querySelector("#wind");
-  let iconElement = document.querySelector("#weather-icon");
 
   let sunriseElement = document.querySelector("#sunrise");
   let sunsetElement = document.querySelector("#sunset");
@@ -58,6 +57,8 @@ function updateCityTemp(response) {
   let sunsetMinutes = "0" + sunset.getMinutes();
   let formattedSunset = `${sunsetHours}:${sunsetMinutes.substr(-2)}`;
 
+  let iconElement = document.querySelector("#weather-icon");
+
   temperatureC = Math.round(response.data.main.temp);
   temperatureElement.innerHTML = temperatureC;
   cityElement.innerHTML = response.data.name;
@@ -66,15 +67,19 @@ function updateCityTemp(response) {
   windElement.innerHTML = Math.round(response.data.wind.speed);
   sunriseElement.innerHTML = formattedSunrise;
   sunsetElement.innerHTML = formattedSunset;
-  console.log(response.data);
+
+  iconElement.setAttribute(
+    "src",
+    `http://openweathermap.org/img/wn/${response.data.weather[0].icon}@2x.png`
+  );
+
+  iconElement.setAttribute("alt", response.data.weather[0].description);
 }
 
-function getCity(response) {
-  response.preventDefault();
+function getCity(city) {
   let units = "metric";
-  let city = document.querySelector("#input-city");
   let apiKey = "8a104eff40d67002b71f619e6f4833ec";
-  let apiUrl = `https://api.openweathermap.org/data/2.5/weather?q=${city.value}&units=${units}&appid=${apiKey}`;
+  let apiUrl = `https://api.openweathermap.org/data/2.5/weather?q=${city}&units=${units}&appid=${apiKey}`;
   axios.get(apiUrl).then(updateCityTemp);
 }
 
@@ -105,6 +110,8 @@ search.addEventListener("submit", getCity);
 let dateElement = document.querySelector("#current-time");
 let currentTime = new Date();
 dateElement.innerHTML = updateDay(currentTime);
+
+getCity("Brighton");
 
 // function celsiusTemp(event) {
 //   event.preventDefault();
