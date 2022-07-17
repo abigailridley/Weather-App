@@ -76,10 +76,12 @@ function updateCityTemp(response) {
   iconElement.setAttribute("alt", response.data.weather[0].description);
 }
 
-function getCity(city) {
+function getCity(response) {
+  response.preventDefault();
+  let city = document.querySelector("#input-city");
   let units = "metric";
   let apiKey = "8a104eff40d67002b71f619e6f4833ec";
-  let apiUrl = `https://api.openweathermap.org/data/2.5/weather?q=${city}&units=${units}&appid=${apiKey}`;
+  let apiUrl = `https://api.openweathermap.org/data/2.5/weather?q=${city.value}&units=${units}&appid=${apiKey}`;
   axios.get(apiUrl).then(updateCityTemp);
 }
 
@@ -110,8 +112,6 @@ search.addEventListener("submit", getCity);
 let dateElement = document.querySelector("#current-time");
 let currentTime = new Date();
 dateElement.innerHTML = updateDay(currentTime);
-
-getCity("Brighton");
 
 // function celsiusTemp(event) {
 //   event.preventDefault();
