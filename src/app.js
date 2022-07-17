@@ -24,35 +24,41 @@ function updateDay(date) {
   return `${currentDay} ${currentHour}:${currentMinute}`;
 }
 
-function celsiusTemp() {
-  let units = document.querySelectorAll("span.units");
-  units.forEach((unitsElement) => {
-    unitsElement.innerHTML = "°C";
-  });
-}
+// function celsiusTemp(event) {
+//   event.preventDefault();
+//   let units = document.querySelectorAll("span.units");
+//   units.forEach((unitsElement) => {
+//     unitsElement.innerHTML = "°C";
+//   });
+// }
 
 function farenheitTemp(event) {
   event.preventDefault();
   let temperatureElement = document.querySelector("#high-temp-day1");
   let farenheitTemp = (temperatureElement.innerHTML * 9) / 5 + 2;
   temperatureElement.innerHTML = Math.round(farenheitTemp);
-
-  let units = document.querySelectorAll("span.units");
-  units.forEach((unitsElement) => {
-    unitsElement.innerHTML = "°F";
-  });
 }
 
-function updateCity(event) {
-  event.preventDefault();
-  let input = document.querySelector("#h1-city");
-  let city = document.querySelector("#input-city");
-  input.innerHTML = `${city.value}`;
-}
+//   let units = document.querySelectorAll("span.units");
+//   units.forEach((unitsElement) => {
+//     unitsElement.innerHTML = "°F";
+//   });
+// }
+
+// function updateCity(event) {
+//   event.preventDefault();
+//   let input = document.querySelector("#h1-city");
+//   let city = document.querySelector("#input-city");
+//   input.innerHTML = `${city.value}`;
+// }
 function updateCityTemp(response) {
   let temperatureElement = document.querySelector("#high-temp-day1");
-  temperatureC = Math.round(response.data.main.temp_max);
+  let cityElement = document.querySelector("#h1-city");
+  let descriptionElement = document.querySelector("#description");
+  temperatureC = Math.round(response.data.main.temp);
   temperatureElement.innerHTML = temperatureC;
+  cityElement.innerHTML = response.data.name;
+  descriptionElement.innerHTML = response.data.weather[0].description;
 }
 
 function getCity(response) {
@@ -91,12 +97,12 @@ locateMeBtn.addEventListener("click", getCurrentLocation);
 let celsiusClick = document.querySelector("#day1-celsius");
 let farenheitClick = document.querySelector("#day1-farenheit");
 
-celsiusClick.addEventListener("click", celsiusTemp);
+// celsiusClick.addEventListener("click", celsiusTemp);
 farenheitClick.addEventListener("click", farenheitTemp);
 
 let search = document.querySelector("#search-bar");
 search.addEventListener("submit", getCity);
-search.addEventListener("submit", updateCity);
+// search.addEventListener("submit", updateCity);
 
 let dateElement = document.querySelector("#current-time");
 let currentTime = new Date();

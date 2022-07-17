@@ -99,6 +99,7 @@
 .weather-description {
   font-size: 20px;
   color: #70757a;
+  text-transform: capitalize;
 }
 
 .wind {
