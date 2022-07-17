@@ -99,6 +99,8 @@
 .weather-description {
   font-size: 20px;
   color: #70757a;
+}
+.weather-description:first-letter {
   text-transform: capitalize;
 }
 

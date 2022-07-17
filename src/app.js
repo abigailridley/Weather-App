@@ -24,14 +24,6 @@ function updateDay(date) {
   return `${currentDay} ${currentHour}:${currentMinute}`;
 }
 
-// function celsiusTemp(event) {
-//   event.preventDefault();
-//   let units = document.querySelectorAll("span.units");
-//   units.forEach((unitsElement) => {
-//     unitsElement.innerHTML = "°C";
-//   });
-// }
-
 function farenheitTemp(event) {
   event.preventDefault();
   let temperatureElement = document.querySelector("#high-temp-day1");
@@ -39,25 +31,35 @@ function farenheitTemp(event) {
   temperatureElement.innerHTML = Math.round(farenheitTemp);
 }
 
-//   let units = document.querySelectorAll("span.units");
-//   units.forEach((unitsElement) => {
-//     unitsElement.innerHTML = "°F";
-//   });
-// }
-
 function updateCityTemp(response) {
   let temperatureElement = document.querySelector("#high-temp-day1");
   let cityElement = document.querySelector("#h1-city");
   let descriptionElement = document.querySelector("#description");
   let humidityElement = document.querySelector("#humidity");
   let windElement = document.querySelector("#wind");
-
+  let sunriseElement = document.querySelector("#sunrise");
+  let sunsetElement = document.querySelector("#sunset");
+  let sunriseTimestamp = response.data.sys.sunrise;
+  let sunrise = new Date(sunriseTimestamp * 1000);
+  let sunriseHours = sunrise.getHours();
+  if (sunriseHours < 10) {
+    sunriseHours = `0${sunriseHours}`;
+  }
+  let sunriseMinutes = "0" + sunrise.getMinutes();
+  let formattedSunrise = `${sunriseHours}:${sunriseMinutes.substr(-2)}`;
+  let sunsetTimestamp = response.data.sys.sunset;
+  let sunset = new Date(sunsetTimestamp * 1000);
+  let sunsetHours = sunset.getHours();
+  let sunsetMinutes = "0" + sunset.getMinutes();
+  let formattedSunset = `${sunsetHours}:${sunsetMinutes.substr(-2)}`;
   temperatureC = Math.round(response.data.main.temp);
   temperatureElement.innerHTML = temperatureC;
   cityElement.innerHTML = response.data.name;
   descriptionElement.innerHTML = response.data.weather[0].description;
   humidityElement.innerHTML = response.data.main.humidity;
   windElement.innerHTML = Math.round(response.data.wind.speed);
+  sunriseElement.innerHTML = formattedSunrise;
+  sunsetElement.innerHTML = formattedSunset;
 }
 
 function getCity(response) {
@@ -88,7 +90,6 @@ locateMeBtn.addEventListener("click", getCurrentLocation);
 let celsiusClick = document.querySelector("#day1-celsius");
 let farenheitClick = document.querySelector("#day1-farenheit");
 
-// celsiusClick.addEventListener("click", celsiusTemp);
 farenheitClick.addEventListener("click", farenheitTemp);
 
 let search = document.querySelector("#search-bar");
@@ -97,3 +98,18 @@ search.addEventListener("submit", getCity);
 let dateElement = document.querySelector("#current-time");
 let currentTime = new Date();
 dateElement.innerHTML = updateDay(currentTime);
+
+// function celsiusTemp(event) {
+//   event.preventDefault();
+//   let units = document.querySelectorAll("span.units");
+//   units.forEach((unitsElement) => {
+//     unitsElement.innerHTML = "°C";
+//   });
+// }
+// celsiusClick.addEventListener("click", celsiusTemp);
+
+//   let units = document.querySelectorAll("span.units");
+//   units.forEach((unitsElement) => {
+//     unitsElement.innerHTML = "°F";
+//   });
+// }
