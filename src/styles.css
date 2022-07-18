@@ -30,7 +30,7 @@
 }
 
 .high-temp-day1 {
-  font-size: 65px;
+  font-size: 60px;
 }
 
 .last-updated {
@@ -52,7 +52,8 @@
   font-weight: lighter;
   display: block;
   text-align: left;
-  margin-left: 20px;
+  margin-left: 15px;
+  color: #70757a;
 }
 .main-app {
   border: solid 1px;
@@ -101,7 +102,8 @@
   font-size: 20px;
   color: #70757a;
   max-width: 10em;
-  text-align: center;
+  text-align: left;
+  margin-left: 10px;
 }
 .weather-description:first-letter {
   text-transform: capitalize;
