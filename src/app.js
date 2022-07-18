@@ -24,19 +24,13 @@ function updateDay() {
   return `${currentDay} ${currentHour}:${currentMinute}`;
 }
 
-function farenheitTemp(event) {
-  event.preventDefault();
-  let temperatureElement = document.querySelector("#high-temp-day1");
-  let farenheitTemp = (temperatureElement.innerHTML * 9) / 5 + 2;
-  temperatureElement.innerHTML = Math.round(farenheitTemp);
-}
-
 function updateCityTemp(response) {
   let temperatureElement = document.querySelector("#high-temp-day1");
   let cityElement = document.querySelector("#h1-city");
   let descriptionElement = document.querySelector("#description");
   let humidityElement = document.querySelector("#humidity");
   let windElement = document.querySelector("#wind");
+  let lowTemperatureElement = document.querySelector("#low-temp-day1");
 
   let sunriseElement = document.querySelector("#sunrise");
   let sunsetElement = document.querySelector("#sunset");
@@ -58,7 +52,11 @@ function updateCityTemp(response) {
   let formattedSunset = `${sunsetHours}:${sunsetMinutes.substr(-2)}`;
 
   let iconElement = document.querySelector("#weather-icon");
+  celsiusTemperature = response.data.main.temp;
+  lowCelsiusTemperature = response.data.main.temp_min;
 
+  lowCelsiusTemp = Math.round(response.data.main.temp_min);
+  lowTemperatureElement.innerHTML = lowCelsiusTemp;
   temperatureC = Math.round(response.data.main.temp);
   temperatureElement.innerHTML = temperatureC;
   cityElement.innerHTML = response.data.name;
@@ -110,18 +108,43 @@ function handleSubmit(event) {
   search(cityInputElement.value);
 }
 
+function displayFarenheitTemp(event) {
+  event.preventDefault();
+  let temperatureElement = document.querySelector("#high-temp-day1");
+  let farenheitTemp = (celsiusTemperature * 9) / 5 + 32;
+  temperatureElement.innerHTML = Math.round(farenheitTemp);
+  let lowTemperatureElement = document.querySelector("#low-temp-day1");
+  let lowFarenheitTemp = (lowCelsiusTemperature * 9) / 5 + 32;
+  lowTemperatureElement.innerHTML = Math.round(lowFarenheitTemp);
+  celsiusClick.classList.remove("active");
+  farenheitClick.classList.add("active");
+}
+function displayCelsiusTemp(event) {
+  event.preventDefault();
+  let temperatureElement = document.querySelector("#high-temp-day1");
+  let lowTemperatureElement = document.querySelector("#low-temp-day1");
+  temperatureElement.innerHTML = Math.round(celsiusTemperature);
+  lowTemperatureElement.innerHTML = Math.round(lowCelsiusTemperature);
+  celsiusClick.classList.add("active");
+  farenheitClick.classList.remove("active");
+}
 let form = document.querySelector("#search-bar");
 form.addEventListener("submit", handleSubmit);
 
 let locateMeBtn = document.querySelector("#locate-me-btn");
 locateMeBtn.addEventListener("click", getCurrentLocation);
 
-let celsiusClick = document.querySelector("#day1-celsius");
-let farenheitClick = document.querySelector("#day1-farenheit");
+let celsiusClick = document.querySelector("#celsius-link");
+let farenheitClick = document.querySelector("#farenheit-link");
 
-farenheitClick.addEventListener("click", farenheitTemp);
+farenheitClick.addEventListener("click", displayFarenheitTemp);
+celsiusClick.addEventListener("click", displayCelsiusTemp);
+
+let celsiusTemperature = null;
+let lowCelsiusTemperature = null;
 
 let dateElement = document.querySelector("#current-time");
 let currentTime = new Date();
 dateElement.innerHTML = updateDay(currentTime);
+
 search("Brighton");

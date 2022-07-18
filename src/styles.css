@@ -7,6 +7,7 @@
   color: #70757a;
   padding: 0;
   margin: 0;
+  text-align: center;
 }
 .col1-list {
   list-style: none;
@@ -47,11 +48,11 @@
   font-size: smaller;
 }
 .low-temp-day1 {
-  font-size: 40px;
+  font-size: 30px;
   font-weight: lighter;
   display: block;
-  margin-left: 80px;
-  color: #70757a;
+  text-align: left;
+  margin-left: 20px;
 }
 .main-app {
   border: solid 1px;
@@ -100,14 +101,24 @@
   font-size: 20px;
   color: #70757a;
   max-width: 10em;
+  text-align: center;
 }
 .weather-description:first-letter {
   text-transform: capitalize;
 }
 
-.wind {
-  color: #444649;
-}
+.wind,
 .humidity {
   color: #444649;
+}
+
+.weather-temperature .active {
+  color: #444649;
+  cursor: default;
+  text-decoration: none;
+}
+
+.farenheit,
+.celsius {
+  text-decoration: none;
 }

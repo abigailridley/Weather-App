@@ -41,26 +41,34 @@
 
 
 <div class="row">
-<div class="col-7">
+<div class="col-3">
  <img src="" class="weather-icon-day1" id="weather-icon" style="width:12em"/>
  <ul class="temperature-list">
   <li class="temperature-list">
-<span class="high-temp-day1" id="high-temp-day1"></span>
- <span class="unit units-high"> <a href="#" class="celsius" id="day1-celsius">°C</a> 
-  | 
-  <a href="#" class="farenheit" id="day1-farenheit">°F</a></span></span>
-</li>
+
     <li class="col1-list weather-description" id="description">
-  Clear
+  
 </li>
   
-
- <li class="last-updated col1-list">
- Last updated: <span class="current-time" id="current-time"></span> <strong>GMT</strong>
-  </li>
 </ul>
-</div>  
- <div class="col-5">
+</div> 
+<div class="col-5 weather-temperature">
+  <ul class="temperature-list">
+    <li class="temperature-list">
+<span class="high-temp-day1" id="high-temp-day1"></span>
+ <span class="unit units-high"> <a href="#" class="celsius active" id="celsius-link">°C</a> 
+  | 
+  <a href="#" class="farenheit" id="farenheit-link">°F</a></span></span>
+</li>
+<li class="temperature-list">
+<div class="low-temp-day1">
+ <span id="low-temp-day1"></span>°
+</div>
+</li>
+</ul>
+</div>
+ 
+ <div class="col-4">
 <ul class="col2-list">
 <li class="col2-list">
 Humidity: <span class="humidity"><span id="humidity"></span>%</span>
@@ -76,6 +84,10 @@ Wind: <span class="wind"><span id="wind"></span>kmh</span>
 </li>
   </ul> 
    </div>
+   
+ <div class="last-updated col1-list">
+ Last updated today at <span class="current-time" id="current-time"></span> GMT
+ </div>
 
               </div>
               </div>
