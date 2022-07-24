@@ -50,6 +50,34 @@ function displayForecast() {
   forecastElement.innerHTML = forecastHTML;
 }
 
+function sunset(timestamp) {
+  let sunsetElement = document.querySelector("#sunset");
+  let sunset = new Date(timestamp * 1000);
+  let sunsetHours = sunset.getHours();
+  if (sunsetHours < 10) {
+    sunsetHours = `0${sunsetHours}`;
+  }
+  let sunsetMinutes = "0" + sunset.getMinutes();
+  let formattedSunset = `${sunsetHours}:${sunsetMinutes.substr(-2)}`;
+  sunsetElement.innerHTML = formattedSunset;
+}
+function sunrise(timestamp) {
+  let sunriseElement = document.querySelector("#sunrise");
+
+  let sunrise = new Date(timestamp * 1000);
+  let sunriseHours = sunrise.getHours();
+  if (sunriseHours < 10) {
+    sunriseHours = `0${sunriseHours}`;
+  }
+  let sunriseMinutes = "0" + sunrise.getMinutes();
+  let formattedSunrise = `${sunriseHours}:${sunriseMinutes.substr(-2)}`;
+  sunriseElement.innerHTML = formattedSunrise;
+}
+
+function getForecast(coordinates) {
+  console.log(coordinates);
+}
+
 function updateCityTemp(response) {
   let temperatureElement = document.querySelector("#high-temp-day1");
   let cityElement = document.querySelector("#h1-city");
@@ -57,25 +85,6 @@ function updateCityTemp(response) {
   let humidityElement = document.querySelector("#humidity");
   let windElement = document.querySelector("#wind");
   let lowTemperatureElement = document.querySelector("#low-temp-day1");
-
-  let sunriseElement = document.querySelector("#sunrise");
-  let sunsetElement = document.querySelector("#sunset");
-  let sunriseTimestamp = response.data.sys.sunrise;
-  let sunrise = new Date(sunriseTimestamp * 1000);
-  let sunriseHours = sunrise.getHours();
-  if (sunriseHours < 10) {
-    sunriseHours = `0${sunriseHours}`;
-  }
-  let sunriseMinutes = "0" + sunrise.getMinutes();
-  let formattedSunrise = `${sunriseHours}:${sunriseMinutes.substr(-2)}`;
-  let sunsetTimestamp = response.data.sys.sunset;
-  let sunset = new Date(sunsetTimestamp * 1000);
-  let sunsetHours = sunset.getHours();
-  if (sunsetHours < 10) {
-    sunsetHours = `0${sunsetHours}`;
-  }
-  let sunsetMinutes = "0" + sunset.getMinutes();
-  let formattedSunset = `${sunsetHours}:${sunsetMinutes.substr(-2)}`;
 
   let iconElement = document.querySelector("#weather-icon");
 
@@ -90,8 +99,6 @@ function updateCityTemp(response) {
   descriptionElement.innerHTML = response.data.weather[0].description;
   humidityElement.innerHTML = response.data.main.humidity;
   windElement.innerHTML = Math.round(response.data.wind.speed);
-  sunriseElement.innerHTML = formattedSunrise;
-  sunsetElement.innerHTML = formattedSunset;
 
   iconElement.setAttribute(
     "src",
@@ -99,6 +106,10 @@ function updateCityTemp(response) {
   );
 
   iconElement.setAttribute("alt", response.data.weather[0].description);
+
+  sunrise(response.data.sys.sunrise);
+  sunset(response.data.sys.sunset);
+  getForecast(response.data.coord);
 }
 
 function getCity(response) {
