@@ -24,6 +24,32 @@ function updateDay() {
   return `${currentDay} ${currentHour}:${currentMinute}`;
 }
 
+function displayForecast() {
+  let forecastElement = document.querySelector("#forecast");
+  let forecastHTML = `<div class="row">`;
+  let days = ["Thu", "Fri", "Sat"];
+  days.forEach(function (day) {
+    forecastHTML =
+      forecastHTML +
+      `
+      <div class="col-2">
+        <div class="weather-forecast-date">
+          ${day}
+        </div>
+        
+        <img src="http://openweathermap.org/img/wn/10d@2x.png" alt="" width="40px">
+            <div class="weather-forecast-temp">
+             <span class="forecast-temp-high">18°</span> 
+             <span class="forecast-temp-min">12°</span> 
+            </div>
+      </div>
+    `;
+  });
+
+  forecastHTML = forecastHTML + `</div>`;
+  forecastElement.innerHTML = forecastHTML;
+}
+
 function updateCityTemp(response) {
   let temperatureElement = document.querySelector("#high-temp-day1");
   let cityElement = document.querySelector("#h1-city");
@@ -52,6 +78,7 @@ function updateCityTemp(response) {
   let formattedSunset = `${sunsetHours}:${sunsetMinutes.substr(-2)}`;
 
   let iconElement = document.querySelector("#weather-icon");
+
   celsiusTemperature = response.data.main.temp;
   lowCelsiusTemperature = response.data.main.temp_min;
 
@@ -147,4 +174,5 @@ let dateElement = document.querySelector("#current-time");
 let currentTime = new Date();
 dateElement.innerHTML = updateDay(currentTime);
 
+displayForecast();
 search("Brighton");
