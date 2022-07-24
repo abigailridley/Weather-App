@@ -24,7 +24,8 @@ function updateDay() {
   return `${currentDay} ${currentHour}:${currentMinute}`;
 }
 
-function displayForecast() {
+function displayForecast(response) {
+  console.log(response.data.daily);
   let forecastElement = document.querySelector("#forecast");
   let forecastHTML = `<div class="row">`;
   let days = ["Thu", "Fri", "Sat"];
@@ -75,7 +76,10 @@ function sunrise(timestamp) {
 }
 
 function getForecast(coordinates) {
-  console.log(coordinates);
+  let apiKey = "5f472b7acba333cd8a035ea85a0d4d4c";
+  let apiUrl = `https://api.openweathermap.org/data/2.5/onecall?lat=${coordinates.lat}&lon=${coordinates.lon}&appid=${apiKey}&units=metric`;
+
+  axios.get(apiUrl).then(displayForecast);
 }
 
 function updateCityTemp(response) {
@@ -185,5 +189,4 @@ let dateElement = document.querySelector("#current-time");
 let currentTime = new Date();
 dateElement.innerHTML = updateDay(currentTime);
 
-displayForecast();
 search("Brighton");
