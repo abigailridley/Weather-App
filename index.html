@@ -24,20 +24,24 @@
     <div class="container main-body">
       <div class="card main-app">
         <div class="card-body">
-
-  <form class="search-bar" id="search-bar" autocomplete="off" autofocus="on">
-      <input type="text" placeholder="Search town/city..." id="input-city" />
+<div class="row"> 
+  <div class="col-6">
+  <form class="search-bar" id="search-bar" >
+      <input class="form-control" type="text" placeholder="Search town/city..." id="input-city" autocomplete="off" autofocus="on"/>
+      </div>
+      <div class="col-6">
       <span class="form-buttons">
-        <button type="submit"> 
+        <button class="btn btn-primary" type="submit"> 
           <i class="fa-solid fa-magnifying-glass"></i>
         </button>
   </form>
-    <button class="locate-me-btn" id="locate-me-btn">Locate Me</button>
+    <button class="locate-me-btn btn btn-primary" id="locate-me-btn">Locate Me</button>
       </span>
+      </div>
 
-     
-  <h1 class="today">Today</h1>
-  <h2 class="title-city" id="h1-city"></h2>
+     </div>
+      <h2 class="title-city" id="h1-city"></h2>
+      <h1 class="today" id="today"></h1>
 
 
 <div class="row">
@@ -78,8 +82,8 @@ Wind: <span class="wind"><span id="wind"></span>kmh</span>
 </li>
 <li class="col2-list"> 
 <div class="sunrise-sunset">
-  <span class="sunrise"><img src="images/sunrise.png"  style="width:2em"/><span id="sunrise"></span></span>
-  <span class="sunset"> <img src="images/moonrise.png" style="width:2em"/><span id="sunset"></span></span>
+  <span class="sunrise"><img src="images/sunrise.png"  style="width:2em"/><span class="sunrise" id="sunrise"></span></span>
+  <span class="sunset"> <img src="images/sunset.png" style="width:2em"/><span class="sunset" id="sunset"></span></span>
 </div>
 </li>
   </ul> 
@@ -89,7 +93,7 @@ Wind: <span class="wind"><span id="wind"></span>kmh</span>
  
     </div>
  <div class="last-updated col1-list">
- Last updated today at <span class="current-time" id="current-time"></span> GMT
+ Last updated at<span class="current-time" id="current-time"></span> GMT
  </div>
  </div>
 
