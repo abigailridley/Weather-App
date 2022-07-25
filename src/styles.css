@@ -20,9 +20,9 @@
 }
 .units-high {
   position: relative;
-  top: -35px;
+  top: -30px;
 
-  font-size: 15px;
+  font-size: 18px;
 }
 .units-low {
   position: relative;
@@ -119,7 +119,7 @@
 
 .weather-forecast {
   padding-top: 20px;
-  text-align: left;
+  text-align: center;
   color: #444649;
 }
 .weather-forecast-date {

@@ -68,30 +68,6 @@ function displayForecast(response) {
   forecastElement.innerHTML = forecastHTML;
 }
 
-function sunset(timestamp) {
-  let sunsetElement = document.querySelector("#sunset");
-  let sunset = new Date(timestamp * 1000);
-  let sunsetHours = sunset.getHours();
-  if (sunsetHours < 10) {
-    sunsetHours = `0${sunsetHours}`;
-  }
-  let sunsetMinutes = "0" + sunset.getMinutes();
-  let formattedSunset = `${sunsetHours}:${sunsetMinutes.substr(-2)}`;
-  sunsetElement.innerHTML = formattedSunset;
-}
-function sunrise(timestamp) {
-  let sunriseElement = document.querySelector("#sunrise");
-
-  let sunrise = new Date(timestamp * 1000);
-  let sunriseHours = sunrise.getHours();
-  if (sunriseHours < 10) {
-    sunriseHours = `0${sunriseHours}`;
-  }
-  let sunriseMinutes = "0" + sunrise.getMinutes();
-  let formattedSunrise = `${sunriseHours}:${sunriseMinutes.substr(-2)}`;
-  sunriseElement.innerHTML = formattedSunrise;
-}
-
 function getForecast(coordinates) {
   let apiKey = "8a104eff40d67002b71f619e6f4833ec";
   let apiUrl = `https://api.openweathermap.org/data/2.5/onecall?lat=${coordinates.lat}&lon=${coordinates.lon}&appid=${apiKey}&units=metric`;
@@ -128,8 +104,6 @@ function updateCityTemp(response) {
 
   iconElement.setAttribute("alt", response.data.weather[0].description);
 
-  sunrise(response.data.sys.sunrise);
-  sunset(response.data.sys.sunset);
   getForecast(response.data.coord);
 }
 
