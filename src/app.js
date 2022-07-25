@@ -167,37 +167,11 @@ function handleSubmit(event) {
   search(cityInputElement.value);
 }
 
-function displayFarenheitTemp(event) {
-  event.preventDefault();
-  let temperatureElement = document.querySelector("#high-temp-day1");
-  let farenheitTemp = (celsiusTemperature * 9) / 5 + 32;
-  temperatureElement.innerHTML = Math.round(farenheitTemp);
-  let lowTemperatureElement = document.querySelector("#low-temp-day1");
-  let lowFarenheitTemp = (lowCelsiusTemperature * 9) / 5 + 32;
-  lowTemperatureElement.innerHTML = Math.round(lowFarenheitTemp);
-  celsiusClick.classList.remove("active");
-  farenheitClick.classList.add("active");
-}
-function displayCelsiusTemp(event) {
-  event.preventDefault();
-  let temperatureElement = document.querySelector("#high-temp-day1");
-  let lowTemperatureElement = document.querySelector("#low-temp-day1");
-  temperatureElement.innerHTML = Math.round(celsiusTemperature);
-  lowTemperatureElement.innerHTML = Math.round(lowCelsiusTemperature);
-  celsiusClick.classList.add("active");
-  farenheitClick.classList.remove("active");
-}
 let form = document.querySelector("#search-bar");
 form.addEventListener("submit", handleSubmit);
 
 let locateMeBtn = document.querySelector("#locate-me-btn");
 locateMeBtn.addEventListener("click", getCurrentLocation);
-
-let celsiusClick = document.querySelector("#celsius-link");
-let farenheitClick = document.querySelector("#farenheit-link");
-
-farenheitClick.addEventListener("click", displayFarenheitTemp);
-celsiusClick.addEventListener("click", displayCelsiusTemp);
 
 let celsiusTemperature = null;
 let lowCelsiusTemperature = null;

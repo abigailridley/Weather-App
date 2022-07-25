@@ -20,7 +20,7 @@
 }
 .units-high {
   position: relative;
-  top: -38px;
+  top: -35px;
 
   font-size: 15px;
 }
@@ -115,17 +115,6 @@
 .wind,
 .humidity {
   color: #444649;
-}
-
-.weather-temperature .active {
-  color: #444649;
-  cursor: default;
-  text-decoration: none;
-}
-
-.farenheit,
-.celsius {
-  text-decoration: none;
 }
 
 .weather-forecast {
