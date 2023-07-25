@@ -48,7 +48,7 @@ function displayForecast(response) {
           ${formatDay(forecastDay.dt)}
         </div>
         
-        <img src="http://openweathermap.org/img/wn/${
+        <img src="https://openweathermap.org/img/wn/${
           forecastDay.weather[0].icon
         }@2x.png" alt="" width="40px">
             <div class="weather-forecast-temp">
@@ -66,6 +66,44 @@ function displayForecast(response) {
 
   forecastHTML = forecastHTML + `</div>`;
   forecastElement.innerHTML = forecastHTML;
+}
+
+
+function convertUTCDateToLocalDate(date) {
+  var newDate = new Date(date.getTime()+date.getTimezoneOffset()*60*1000);
+
+  var offset = date.getTimezoneOffset() / 60;
+  var hours = date.getHours();
+
+  newDate.setHours(hours - offset);
+
+  return newDate;   
+}
+
+function sunset(timestamp, timezone) {
+  let sunsetElement = document.querySelector("#sunset");
+  let sunset = new Date(timestamp * 1000);
+  // let sunsetHours = sunset.getHours();
+  // if (sunsetHours < 10) {
+  //   sunsetHours = `0${sunsetHours}`;
+  // }
+  // let sunsetMinutes = "0" + sunset.getMinutes();
+  // let formattedSunset = `${sunsetHours}:${sunsetMinutes.substr(-2)}`;
+  // sunsetElement.textContent = moment.utc(sunset, 'X').add(timezone,'seconds').format('HH:mm')
+  sunsetElement.textContent = moment.utc(timestamp, 'X').add(timezone, 'seconds').format('HH:mm')
+}
+
+function sunrise(timestamp, timezone) {
+  let sunriseElement = document.querySelector("#sunrise");
+
+  // let sunrise = new Date(timestamp * 1000);
+  // let sunriseHours = sunrise.getHours();
+  // if (sunriseHours < 10) {
+  //   sunriseHours = `0${sunriseHours}`;
+  // }
+  // let sunriseMinutes = "0" + sunrise.getMinutes();
+  // let formattedSunrise = `${sunriseHours}:${sunriseMinutes.substr(-2)}`;
+  sunriseElement.textContent = moment.utc(timestamp, 'X').add(timezone, 'seconds').format('HH:mm')
 }
 
 function getForecast(coordinates) {
@@ -99,11 +137,13 @@ function updateCityTemp(response) {
 
   iconElement.setAttribute(
     "src",
-    `http://openweathermap.org/img/wn/${response.data.weather[0].icon}@2x.png`
+    `https://openweathermap.org/img/wn/${response.data.weather[0].icon}@2x.png`
   );
 
   iconElement.setAttribute("alt", response.data.weather[0].description);
 
+  sunrise(response.data.sys.sunrise, response.data.timezone);
+  sunset(response.data.sys.sunset, response.data.timezone);
   getForecast(response.data.coord);
 }
 
@@ -155,3 +195,5 @@ let currentTime = new Date();
 dateElement.innerHTML = updateDay(currentTime);
 
 search("Brighton");
+
+
