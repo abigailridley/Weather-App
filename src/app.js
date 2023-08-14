@@ -83,26 +83,13 @@ function convertUTCDateToLocalDate(date) {
 function sunset(timestamp, timezone) {
   let sunsetElement = document.querySelector("#sunset");
   let sunset = new Date(timestamp * 1000);
-  // let sunsetHours = sunset.getHours();
-  // if (sunsetHours < 10) {
-  //   sunsetHours = `0${sunsetHours}`;
-  // }
-  // let sunsetMinutes = "0" + sunset.getMinutes();
-  // let formattedSunset = `${sunsetHours}:${sunsetMinutes.substr(-2)}`;
-  // sunsetElement.textContent = moment.utc(sunset, 'X').add(timezone,'seconds').format('HH:mm')
+
   sunsetElement.textContent = moment.utc(timestamp, 'X').add(timezone, 'seconds').format('HH:mm')
 }
 
 function sunrise(timestamp, timezone) {
   let sunriseElement = document.querySelector("#sunrise");
 
-  // let sunrise = new Date(timestamp * 1000);
-  // let sunriseHours = sunrise.getHours();
-  // if (sunriseHours < 10) {
-  //   sunriseHours = `0${sunriseHours}`;
-  // }
-  // let sunriseMinutes = "0" + sunrise.getMinutes();
-  // let formattedSunrise = `${sunriseHours}:${sunriseMinutes.substr(-2)}`;
   sunriseElement.textContent = moment.utc(timestamp, 'X').add(timezone, 'seconds').format('HH:mm')
 }
 
