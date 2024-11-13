@@ -29,20 +29,28 @@ function formatDay(timestamp) {
   let date = new Date(timestamp * 1000);
   let day = date.getDay();
   let dayIndex = ["Sun", "Mon", "Tue", "Wed", "Thu", "Fri", "Sat"];
-
   return dayIndex[day];
 }
 
+function formatTime(timestamp, timezoneOffset) {
+  let localTime = new Date((timestamp + timezoneOffset) * 1000); // Adjust to local time
+  let hours = localTime.getHours();
+  let minutes = localTime.getMinutes();
+  if (minutes < 10) {
+    minutes = `0${minutes}`;
+  }
+  return `${hours}:${minutes}`;
+}
+
 function displayForecast(response) {
-  let forecast = response.data.daily;
+  let forecast = response.data.list;
   let forecastElement = document.querySelector("#forecast");
   let forecastHTML = `<div class="row">`;
 
-  forecast.slice(1).forEach(function (forecastDay, index) {
-    if (index < 4) {
-      forecastHTML =
-        forecastHTML +
-        `
+  // Start at the second forecast entry (index 1) and iterate in 8-hour intervals for the next 4 days
+  for (let i = 1; i < 5; i++) {
+    let forecastDay = forecast[i * 8]; // Skip the first day's data (i=1, i*8 will give 8, then 16, 24...)
+    forecastHTML += `
       <div class="col-3">
         <div class="weather-forecast-date">
           ${formatDay(forecastDay.dt)}
@@ -51,52 +59,26 @@ function displayForecast(response) {
         <img src="https://openweathermap.org/img/wn/${
           forecastDay.weather[0].icon
         }@2x.png" alt="" width="40px">
-            <div class="weather-forecast-temp">
-             <span class="forecast-temp-high">${Math.round(
-               forecastDay.temp.max
-             )}°</span> 
-             <span class="forecast-temp-min">${Math.round(
-               forecastDay.temp.min
-             )}°</span> 
-            </div>
+        
+        <div class="weather-forecast-temp">
+          <span class="forecast-temp-high">${Math.round(
+            forecastDay.main.temp_max
+          )}°</span> 
+          <span class="forecast-temp-min">${Math.round(
+            forecastDay.main.temp_min
+          )}°</span> 
+        </div>
       </div>
     `;
-    }
-  });
+  }
 
-  forecastHTML = forecastHTML + `</div>`;
+  forecastHTML += `</div>`;
   forecastElement.innerHTML = forecastHTML;
 }
 
-
-function convertUTCDateToLocalDate(date) {
-  var newDate = new Date(date.getTime()+date.getTimezoneOffset()*60*1000);
-
-  var offset = date.getTimezoneOffset() / 60;
-  var hours = date.getHours();
-
-  newDate.setHours(hours - offset);
-
-  return newDate;   
-}
-
-function sunset(timestamp, timezone) {
-  let sunsetElement = document.querySelector("#sunset");
-  let sunset = new Date(timestamp * 1000);
-
-  sunsetElement.textContent = moment.utc(timestamp, 'X').add(timezone, 'seconds').format('HH:mm')
-}
-
-function sunrise(timestamp, timezone) {
-  let sunriseElement = document.querySelector("#sunrise");
-
-  sunriseElement.textContent = moment.utc(timestamp, 'X').add(timezone, 'seconds').format('HH:mm')
-}
-
 function getForecast(coordinates) {
-  let apiKey = "8a104eff40d67002b71f619e6f4833ec";
-  let apiUrl = `https://api.openweathermap.org/data/2.5/onecall?lat=${coordinates.lat}&lon=${coordinates.lon}&appid=${apiKey}&units=metric`;
-
+  let apiKey = "8a104eff40d67002b71f619e6f4833ec"; // Your OpenWeatherMap API key
+  let apiUrl = `https://api.openweathermap.org/data/2.5/forecast?lat=${coordinates.lat}&lon=${coordinates.lon}&appid=${apiKey}&units=metric`;
   axios.get(apiUrl).then(displayForecast);
 }
 
@@ -107,6 +89,8 @@ function updateCityTemp(response) {
   let humidityElement = document.querySelector("#humidity");
   let windElement = document.querySelector("#wind");
   let lowTemperatureElement = document.querySelector("#low-temp-day1");
+  let sunriseElement = document.querySelector("#sunrise");
+  let sunsetElement = document.querySelector("#sunset");
 
   let iconElement = document.querySelector("#weather-icon");
 
@@ -129,9 +113,18 @@ function updateCityTemp(response) {
 
   iconElement.setAttribute("alt", response.data.weather[0].description);
 
-  sunrise(response.data.sys.sunrise, response.data.timezone);
-  sunset(response.data.sys.sunset, response.data.timezone);
-  getForecast(response.data.coord);
+  // Handling sunrise and sunset times with timezone offset
+  let timezoneOffset = response.data.timezone; // Timezone offset in seconds
+  sunriseElement.innerHTML = formatTime(
+    response.data.sys.sunrise,
+    timezoneOffset
+  );
+  sunsetElement.innerHTML = formatTime(
+    response.data.sys.sunset,
+    timezoneOffset
+  );
+
+  getForecast(response.data.coord); // Fetch the 5-day forecast
 }
 
 function getCity(response) {
@@ -181,6 +174,5 @@ let dateElement = document.querySelector("#current-time");
 let currentTime = new Date();
 dateElement.innerHTML = updateDay(currentTime);
 
+// Default city to display data for
 search("Brighton");
-
-
