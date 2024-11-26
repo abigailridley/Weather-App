@@ -1,6 +1,6 @@
 # Weather App
 
-Functioning weather app, with 5 day forecast and geolocation
+Functioning weather app, with 5 day forecast and geolocation. As well as a sunrise and sunset feature that shows the time in local timezone. 
 
 | Technology        | Purpose                          |
 |--------------------|----------------------------------|
@@ -11,3 +11,5 @@ Functioning weather app, with 5 day forecast and geolocation
 | Timezone API      | Retrieving time zone information based on location |
 | Axios             | Making HTTP requests to APIs     |
 | Netlify           | Hosting the project and enabling continuous deployment |
+
+
