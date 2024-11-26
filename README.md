@@ -1,4 +1,4 @@
-# Weather App
+# Weather App 🌤️
 
 Functioning weather app, with 5 day forecast and geolocation. As well as a sunrise and sunset feature that shows the time in local timezone. 
 
